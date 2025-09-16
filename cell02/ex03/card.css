@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+    padding: 20px;
+	text-align: center;
+}
+
+.card {
+    background: white;
+    width: 50%;
+	height: auto;
+    overflow: hidden;
+}
+
+.title {
+    background-color: #f1f3f5;
+    color: #04080b;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.profile-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.img-cell {
+    padding: 24px 0 16px;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #f1f3f5;
+}
+
+.login-cell {
+    padding: 8px 0;
+}
+
+.login {
+    font-size: 20px;
+    font-weight: 500;
+    color: #000000;
+}
+
+
+
+.desc, .location {
+    color: #000000;
+    font-size: 14px;
+    margin: 2px 0;
+}
+
+.social-cell {
+    padding: 16px 0;
+    border-top: 1px solid #f1f3f5;
+}
+
+.social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.icon {
+    font-size: 16px;
+}
+
+.text {
+    color: #040506;
+    font-size: 14px;
+}
+
+.btn-cell {
+    padding: 16px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #f1f3f5;
+}
+
+.contact-btn {
+    width: 100%;
+    padding: 10px;
+    background: white;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    color: #040608;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.contact-btn:hover {
+    background: #f1f3f5;
+}

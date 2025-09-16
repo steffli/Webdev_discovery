@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    text-align: center;
+    padding: 2.5rem;
+    background-color: white;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 100%;
+}
+
+h1 {
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.color-button {
+    font-size: 1.8rem;
+    padding: 15px 40px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.color-button:active {
+    transform: translateY(1px);
+}
+
+.instruction {
+    margin-top: 1.8rem;
+    color: #7f8c8d;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+

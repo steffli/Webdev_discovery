@@ -1,0 +1,16 @@
+body {
+	text-align: center;
+	background-color: pink;
+}
+label {
+	font-size: 32px;
+	font-weight: bold;
+}
+select {
+	font-size: 28px;
+	width: 25%;
+}
+img {
+	width: 45%;
+	height: 30%;
+}

@@ -1,0 +1,24 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.column {
+    flex: 1;
+}
+
+.left {
+    background-color: red;
+}
+
+.right {
+    background-color: pink;
+}

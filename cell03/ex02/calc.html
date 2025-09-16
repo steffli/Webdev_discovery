@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Calculator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .calculator {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            width: 100%;
+            max-width: 60%;
+        }
+        
+        h1 {
+            text-align: center;
+            color: black;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 10px;
+			border-color: black;
+		}
+        
+        input[type="number"] {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input[type="number"]:focus {
+            border-color: #4a86e8;
+            outline: none;
+        }
+        
+        select {
+            border-radius: 6px;
+            font-size: 16px;
+            background-color: white;
+            cursor: pointer;
+        }
+        
+        button {
+            width: 100%;
+            padding: 14px;
+            background-color: #4a86e8;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #3a76d8;
+        }
+        
+        .instructions {
+            margin-top: 25px;
+            padding: 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            color: black;
+        }
+        
+        .instructions h3 {
+            margin-bottom: 10px;
+            color: black;
+        }
+        
+        .instructions ul {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <h1>Basic Calculator</h1>
+        
+        <div class="input-group">
+            <input type="number" id="leftInput" placeholder="Left operand">
+            <select id="operator">
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">×</option>
+                <option value="/">÷</option>
+                <option value="%">%</option>
+            </select>
+            <input type="number" id="rightInput" placeholder="Right operand">
+        </div>
+        
+        <button id="calculateBtn">Try me!</button>
+        
+        <div class="instructions">
+            <h3>Instructions:</h3>
+            <ul>
+                <li>Enter positive integers in both fields</li>
+                <li>Select an operator</li>
+                <li>Click "Try me!" to calculate</li>
+                <li>Division/modulo by zero shows special message</li>
+                <li>Invalid inputs show error message</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const leftInput = document.getElementById('leftInput');
+            const rightInput = document.getElementById('rightInput');
+            const operatorSelect = document.getElementById('operator');
+            const calculateBtn = document.getElementById('calculateBtn');
+            
+            function validateInputs() {
+                const leftValue = leftInput.value;
+                const rightValue = rightInput.value;
+                if (!/^\d+$/.test(leftValue) || !/^\d+$/.test(rightValue))
+                    return false;
+                return true;
+            }
+            function calculate() {
+                if (!validateInputs())
+				{
+                    alert('Error :(');
+                    console.log('Error: Invalid inputs');
+                    return;
+                }
+                
+                const leftValue = parseInt(leftInput.value);
+                const rightValue = parseInt(rightInput.value);
+                const operator = operatorSelect.value;
+                if ((operator === '/' || operator === '%') && rightValue === 0)
+				{
+                    alert("It's over 9000!");
+                    console.log("It's over 9000!");
+                    return;
+                }
+                
+                let result;
+                switch (operator) {
+                    case '+':
+                        result = leftValue + rightValue;
+                        break;
+                    case '-':
+                        result = leftValue - rightValue;
+                        break;
+                    case '*':
+                        result = leftValue * rightValue;
+                        break;
+                    case '/':
+                        result = leftValue / rightValue;
+                        break;
+                    case '%':
+                        result = leftValue % rightValue;
+                        break;
+                }
+                alert(`Result: ${result}`);
+                console.log(`Calculation: ${leftValue} ${operator} ${rightValue} = ${result}`);
+            }
+            calculateBtn.addEventListener('click', calculate);
+            setInterval(() => {
+                alert('Please, use me...');
+            }, 30000);
+        });
+    </script>
+</body>
+</html>
