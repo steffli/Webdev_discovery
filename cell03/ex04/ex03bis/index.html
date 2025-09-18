@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        #ft_list {
+            width: 75%;
+            margin-top: 20px;
+        }
+        .todo-item {
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+        }
+        .todo-item:hover {
+            background-color: #e0e0e0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 25%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <button id="newTodoBtn">New</button>
+    <div id="ft_list"></div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        console.log("jQuery loaded:", typeof $); // Debug: Verify jQuery is loaded
+
+        function setCookie(name, value, days) {
+            let expires = "";
+            if (days) {
+                let date = new Date();
+                date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + encodeURIComponent(JSON.stringify(value)) + expires + "; path=/";
+            console.log("Cookie set:", name, value);
+        }
+
+        function getCookie(name) {
+            let nameEQ = name + "=";
+            let ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i].trim();
+                if (c.indexOf(nameEQ) == 0) {
+                    let value = JSON.parse(decodeURIComponent(c.substring(nameEQ.length, c.length)));
+                    console.log("Cookie retrieved:", name, value);
+                    return value;
+                }
+            }
+            console.log("Cookie not found:", name);
+            return null;
+        }
+
+        function loadTodos() {
+            let todos = getCookie("todos");
+            if (todos) {
+                console.log("Loading todos:", todos);
+                todos.forEach(todo => {
+                    addTodoToDOM(todo);
+                });
+            } else {
+                console.log("No todos found in cookies");
+            }
+        }
+
+        function saveTodos() {
+            let todos = [];
+            $('#ft_list .todo-item').each(function() {
+                todos.push($(this).text());
+            });
+            console.log("Saving todos:", todos);
+            setCookie("todos", todos, 7);
+        }
+
+        function addTodoToDOM(todoText) {
+            console.log("Adding to DOM:", todoText);
+            let $todoDiv = $('<div>').addClass('todo-item').text(todoText);
+            $todoDiv.on('click', function() {
+                console.log("Todo clicked:", $(this).text());
+                if (confirm("Do you want to remove this TO DO?")) {
+                    $(this).remove();
+                    console.log("Todo removed:", todoText);
+                    saveTodos();
+                }
+            });
+            if ($('#ft_list').children().length > 0) {
+                $('#ft_list').prepend($todoDiv);
+            } else {
+                $('#ft_list').append($todoDiv);
+            }
+            console.log("Current DOM todos:", $('#ft_list .todo-item').length);
+        }
+
+        function addNewTodo() {
+            console.log("addNewTodo called");
+            let todoText = prompt("Enter a new TO DO:");
+            console.log("Prompt returned:", todoText); 
+            if (todoText && todoText.trim() !== "") {
+                addTodoToDOM(todoText.trim());
+                saveTodos();
+            } else {
+                console.log("Invalid input from prompt:", todoText); 
+            }
+        }
+
+        $('#newTodoBtn').on('click', function() {
+            console.log("New button clicked"); 
+            addNewTodo();
+        });
+
+        loadTodos();
+    });
+    </script>
+</body>
+</html>
